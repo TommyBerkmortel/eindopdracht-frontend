@@ -4,16 +4,16 @@ import {NavLink} from "react-router-dom";
 
 function Header() {
     return (
-        <header className="outer-container">
-            <div className="inner-container">
+        <header>
+            <nav>
                 <ul>
-                    {/*<li><NavLink to="/" activeClassName="active-link">Barbeque-score</NavLink></li>
-                    <li><NavLink to="/" activeClassName="active-link">Recepten</NavLink></li>
-                    <li><NavLink to="/" activeClassName="active-link">Tips & tricks</NavLink></li>
-                    <li><NavLink to="/" activeClassName="active-link">Contact</NavLink></li>
-                    <li><NavLink to="/" activeClassName="active-link">Registreren</NavLink></li>*/}
+                    <li><NavLink to="/barbeque-score" activeClassName="active-link">Barbeque-score</NavLink></li>
+                    <li><NavLink to="/recepten" activeClassName="active-link">Recepten</NavLink></li>
+                    <li><NavLink to="/tips-tricks" activeClassName="active-link">Tips & tricks</NavLink></li>
+                    <li><NavLink to="/contact" activeClassName="active-link">Contact</NavLink></li>
+                    <li><NavLink to="/login" activeClassName="active-link">inloggen</NavLink></li>
                 </ul>
-            </div>
+            </nav>
         </header>
     );
 }

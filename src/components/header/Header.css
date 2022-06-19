@@ -1,0 +1,22 @@
+.active-link {
+    border-bottom: 2px solid white;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+}
+
+nav ul a {
+    text-decoration: none;
+}
+
+header {
+
+    position: sticky;
+    top: 0;
+    width: 100%;
+
+}
