@@ -18,6 +18,17 @@ function Registreren() {
             <h1>Registreren</h1>
             <form className="registration-form" onSubmit={handleSubmit}>
 
+                <label htmlFor="details-username">
+                    <p>Gebruikersnaam</p>
+                    <input
+                        type="text"
+                        id="details-username"
+                        onChange={(event) => setUsername(event.target.value)}
+                        value={username}
+                        name="details-username"
+                    />
+                </label>
+
                 <label htmlFor="details-email">
                     <p>Emailadres</p>
                     <input
@@ -37,21 +48,9 @@ function Registreren() {
                         onChange={(event) => setPassword(event.target.value)}
                         value={password}
                         name="details-password"
-
                     />
                 </label>
 
-                <label htmlFor="details-username">
-                    <p>Gebruikersnaam</p>
-                    <input
-                        type="text"
-                        id="details-username"
-                        onChange={(event) => setUsername(event.target.value)}
-                        value={username}
-                        name="details-username"
-
-                    />
-                </label>
                 <p>Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.</p>
                 <div className="button-container">
                     <Button
@@ -61,7 +60,6 @@ function Registreren() {
                     </Button>
                 </div>
             </form>
-
 
 
         </div>

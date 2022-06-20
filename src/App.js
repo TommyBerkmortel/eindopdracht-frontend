@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './App.css';
 import Header from "./components/header/Header";
 import Wrapper from "./components/wrapper/Wrapper";
-import {Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import Home from "./pages/home/Home";
 import BarbequeScore from "./pages/barbeque-score/Barbeque-score";
 import Recepten from "./pages/recepten/Recepten";
@@ -11,9 +11,11 @@ import Contact from "./pages/contact/Contact";
 import Registreren from "./pages/registreren/Registreren";
 import Login from "./pages/login/Login";
 import Logo from "./components/logo/Logo";
+import {AuthContext} from "./context/AuthContext";
 
 
 function App() {
+    const { isAuth } = useContext(AuthContext);
     return (
         <>
             <Wrapper>
@@ -24,15 +26,15 @@ function App() {
                     </Route>
 
                     <Route path="/barbeque-score">
-                        <BarbequeScore/>
+                        {isAuth ? <BarbequeScore/> : <Redirect to="/" />}
                     </Route>
 
                     <Route path="/recepten">
-                        <Recepten/>
+                        {isAuth ? <Recepten/> : <Redirect to="/" />}
                     </Route>
 
                     <Route path="/tips-tricks">
-                        <TipsTricks/>
+                        {isAuth ? <TipsTricks/> : <Redirect to="/" />}
                     </Route>
 
                     <Route path="/contact">
