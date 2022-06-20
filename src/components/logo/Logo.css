@@ -1,0 +1,14 @@
+.logo-container {
+    display: flex;
+    max-width: 120px;
+    flex-wrap: wrap;
+    position: fixed;
+    left: 25px;
+    bottom: 25px;
+}
+
+.logo-container img {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}

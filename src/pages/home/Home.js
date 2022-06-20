@@ -22,14 +22,6 @@ function Home() {
                         registreren
                     </Button>
 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, enim expedita fuga harum nam non officia quidem sit vitae voluptas. Corporis cum eaque eligendi est excepturi exercitationem harum hic illo ipsa iste magni minus, nisi odit quisquam quos reiciendis repellat saepe sed tempora tenetur vitae voluptas voluptatem voluptatibus? A aliquid amet animi at deleniti dolores, excepturi, exercitationem expedita facilis fuga id in iusto labore laboriosam laborum libero, magni modi molestiae molestias nam necessitatibus neque nesciunt nihil nobis odio odit porro quaerat quibusdam quo sequi tempora temporibus vero voluptates. Adipisci, ea esse excepturi impedit necessitatibus quo ratione sit veniam! Laudantium, sapiente.
-                </p>
-
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, enim expedita fuga harum nam non officia quidem sit vitae voluptas. Corporis cum eaque eligendi est excepturi exercitationem harum hic illo ipsa iste magni minus, nisi odit quisquam quos reiciendis repellat saepe sed tempora tenetur vitae voluptas voluptatem voluptatibus? A aliquid amet animi at deleniti dolores, excepturi, exercitationem expedita facilis fuga id in iusto labore laboriosam laborum libero, magni modi molestiae molestias nam necessitatibus neque nesciunt nihil nobis odio odit porro quaerat quibusdam quo sequi tempora temporibus vero voluptates. Adipisci, ea esse excepturi impedit necessitatibus quo ratione sit veniam! Laudantium, sapiente.
-                </p>
-
             </section>
 
         </>

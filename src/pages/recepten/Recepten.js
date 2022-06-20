@@ -1,10 +1,12 @@
 import React from 'react';
+import './Recepten.css'
 
 function Recepten() {
     return (
-        <div>
+        <section className="content">
             <h1>Recepten</h1>
-        </div>
+
+        </section>
     );
 }
 
