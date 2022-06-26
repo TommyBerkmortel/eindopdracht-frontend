@@ -1,5 +1,7 @@
-import React, {createContext, useState} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
+import validityToken from "../helpers/validityToken";
+import axios from "axios";
 
 
 export const AuthContext = createContext({});
@@ -10,17 +12,82 @@ function AuthContextProvider({children}) {
     const [auth, toggleAuth] = useState({
         isAuth: false,
         user: null,
+        status: 'pending'
     });
 
-    function login() {
-        console.log("Je bent ingelogd")
-        toggleAuth({isAuth: true, user: null});
-        history.push("/barbeque-score")
+    useEffect(() => {
+        const jwt = localStorage.getItem("token")
+        if (jwt && validityToken(jwt)) {
+            async function getUserData(jwt) {
+
+                try {
+                    const userData = await axios.get(`https://frontend-educational-backend.herokuapp.com/api/user`,
+                        {headers:{
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${jwt}`,
+                            }})
+
+                    toggleAuth({
+                        isAuth: true,
+                        user: {
+                            username: userData.data.username,
+                            email: userData.data.email,
+                            id: userData.data.id,
+                        },
+                        status: 'done'
+                    });
+                    console.log("Token wordt gechecked op geldigheid & user data wordt opnieuw opgehaald")
+                } catch (e) {
+                    console.error(e)
+                    console.log("Er is iets misgegaan met het ophalen van de data");
+                }
+            }
+            getUserData(jwt);
+
+        } else {
+            toggleAuth({
+                isAuth: false,
+                user: null,
+                status: 'done'
+            })
+        }
+    }, []);
+
+    function login(jwtToken) {
+        console.log("Je bent ingelogd en de token is in de localstorage geplaatst")
+        localStorage.setItem('token', jwtToken);
+        getData(jwtToken);
     }
 
     function logout() {
-        console.log("Je bent uitgelogd")
-        toggleAuth({isAuth: false, user: null});
+        console.log("User is uitgelogged en accestoken is verwijderd uit de local storage");
+        localStorage.clear();
+        toggleAuth({isAuth: false, user: null, status: 'done'});
+        history.push('/');
+    }
+
+    async function getData(token){
+        try{
+            const userData = await axios.get(`https://frontend-educational-backend.herokuapp.com/api/user`,
+                {headers:{
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    }})
+
+            toggleAuth({
+                isAuth: true,
+                user: {
+                    username: userData.data.username,
+                    email: userData.data.email,
+                    id: userData.data.id,
+                },
+                status: 'done'
+            });
+            history.push("/barbeque-score")
+
+        }catch(e){
+            console.error()
+        }
     }
 
 
@@ -33,7 +100,8 @@ function AuthContextProvider({children}) {
 
     return (
         <AuthContext.Provider value={contextData}>
-            {children}
+            {auth.status === "done" && children}
+            {auth.status === "pending" && <p>Loading.....</p>}
         </AuthContext.Provider>
     );
 }

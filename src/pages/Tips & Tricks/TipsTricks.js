@@ -59,7 +59,6 @@ function TipsTricks() {
                     eventuele
                     zwarte randjes of korstjes weg</p>
 
-                <p>[de tekst gaat verder onder de foto]</p>
             </article>
 
             <article>

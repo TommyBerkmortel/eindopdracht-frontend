@@ -1,16 +1,33 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import './Registreren.css'
 import Button from "../../components/button/Button";
+import axios from "axios";
 
 function Registreren() {
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const history = useHistory();
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         console.log(username, email, password);
+
+        try {
+            const result = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup',
+                {
+                    "username": username,
+                    "email" : email,
+                    "password" : password,
+                    "role": ["user"]
+                })
+            console.log(result);
+            history.push("/login");
+            console.log("De gebruiker is ingelogd op de server en ontvangt een token")
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     return (
