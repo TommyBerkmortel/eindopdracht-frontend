@@ -17,6 +17,20 @@
     text-transform: uppercase;
 }
 
+input, textarea {
+    text-transform: none;
+    font-size: 24px;
+    width: 50%;
+}
+
+input {
+    text-align: center;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 3px solid var(--borderColor);
+    height: 50px;
+}
+
 a, button {
     font-family: 'Kameron', serif;
     font-size: 24px;
@@ -39,9 +53,12 @@ p {
     align-items: center;
     text-align: center;
     margin: 80px;
+    padding: 50px;
     gap: 30px;
     border-radius: 10px;
     border: 3px solid var(--borderColor);
+    background-color: rgba(34, 34, 34, 0.80);
+
 }
 
 body {

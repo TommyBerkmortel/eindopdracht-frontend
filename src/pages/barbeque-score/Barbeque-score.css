@@ -1,0 +1,12 @@
+.result-container {
+    border: 3px solid var(--borderColor);
+    border-radius: 10px;
+    width: 100%;
+}
+
+.inner-result-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    border: 3px solid purple;
+}

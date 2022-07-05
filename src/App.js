@@ -18,8 +18,9 @@ function App() {
     const { isAuth } = useContext(AuthContext);
     return (
         <>
+            <Header/>
             <Wrapper>
-                <Header/>
+
                 <Switch>
                     <Route exact path="/">
                         <Home/>

@@ -2,21 +2,11 @@ import React from 'react';
 import './Home.css'
 import Button from "../../components/button/Button";
 import {useHistory} from "react-router-dom";
-import axios from "axios";
 
 
 function Home() {
     const history = useHistory()
-    test()
 
-    async function test() {
-        try{
-            const test = await axios.get('https://frontend-educational-backend.herokuapp.com/api/test/all')
-            console.log(test.data)
-        }catch (e) {
-            console.error(e);
-        }
-    }
     return (
         <>
             <section className="home-content">

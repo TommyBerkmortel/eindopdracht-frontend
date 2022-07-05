@@ -1,5 +1,6 @@
 import React, {useState}  from 'react';
 import Button from "../../components/button/Button";
+import './Contact.css'
 
 
 function Contact() {
@@ -31,12 +32,14 @@ function Contact() {
 
                 <label htmlFor="details-message">
                     <p>Bericht (verplicht)</p>
-                    <input
+                    <textarea
                         type="text"
                         id="details-message"
                         onChange={(event) => setMessage(event.target.value)}
                         value={message}
                         name="details-message"
+                        rows="10"
+                        cols="50"
                     />
                 </label>
 
