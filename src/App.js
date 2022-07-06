@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import './App.css';
 import Header from "./components/header/Header";
 import Wrapper from "./components/wrapper/Wrapper";
@@ -12,13 +12,27 @@ import Registreren from "./pages/registreren/Registreren";
 import Login from "./pages/login/Login";
 import Logo from "./components/logo/Logo";
 import {AuthContext} from "./context/AuthContext";
+import PopUp from "./components/popup/PopUp";
+import ChangePassword from "./pages/changePassword/ChangePassword";
+import ChangeEmail from "./pages/changeEmail/ChangeEmail";
 
 
 function App() {
     const { isAuth } = useContext(AuthContext);
+    const [popup, togglePopup] = useState(false);
+    const [popupText, setPopupText] = useState('');
+
     return (
         <>
-            <Header/>
+            <Header
+                togglePopup={togglePopup}
+                setPopupText={setPopupText}
+            />
+
+            <PopUp trigger={popup} setTrigger={togglePopup}>
+                <h3>{popupText}</h3>
+            </PopUp>
+
             <Wrapper>
 
                 <Switch>
@@ -38,17 +52,33 @@ function App() {
                         {isAuth ? <TipsTricks/> : <Redirect to="/" />}
                     </Route>
 
+                    <Route path="/changepassword">
+                        {isAuth ? <ChangePassword /> : <Redirect to="/" />}
+                    </Route>
+
+                    <Route path="/changeemail">
+                        {isAuth ? <ChangeEmail /> : <Redirect to="/" />}
+                    </Route>
+
                     <Route path="/contact">
                         <Contact/>
                     </Route>
 
                     <Route path="/registratie">
-                        <Registreren/>
+                        <Registreren
+                            togglePopup={togglePopup}
+                            setPopupText={setPopupText}
+                        />
                     </Route>
 
                     <Route path="/login">
-                        <Login/>
+                        <Login
+                            togglePopup={togglePopup}
+                            setPopupText={setPopupText}
+                        />
                     </Route>
+
+
                 </Switch>
             </Wrapper>
             <Logo/>

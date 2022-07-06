@@ -1,4 +1,4 @@
-import React, {useState}  from 'react';
+import React, {useState, useTransition} from 'react';
 import Button from "../../components/button/Button";
 import './Contact.css'
 
@@ -9,8 +9,13 @@ function Contact() {
     const [websiteLink, setWebsiteLink] = useState('');
 
 
+
     function handleSubmit(e) {
         e.preventDefault();
+        console.log(email, message, websiteLink);
+        setEmail('');
+        setMessage('');
+        setWebsiteLink('');
     }
 
     return (

@@ -3,28 +3,27 @@ import {Link, useHistory} from "react-router-dom";
 import './Registreren.css'
 import Button from "../../components/button/Button";
 import axios from "axios";
+import { useForm } from "react-hook-form";
 
-function Registreren() {
-    const [username, setUsername] = useState('');
+function Registreren({togglePopup, setPopupText}) {
+    /*const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('');*/
     const history = useHistory();
+    const {register, handleSubmit, formState: {errors}} = useForm();
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-        console.log(username, email, password);
-
+    async function onFormSubmit(data) {
         try {
-            const result = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup',
+            await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup',
                 {
-                    "username": username,
-                    "email" : email,
-                    "password" : password,
+                    "username": data.username,
+                    "email" : data.email,
+                    "password" : data.password,
                     "role": ["user"]
                 })
-            console.log(result);
             history.push("/login");
-            console.log("De gebruiker is ingelogd op de server en ontvangt een token")
+            togglePopup(true);
+            setPopupText("Je bent succesvol geregistreerd!");
         } catch (e) {
             console.error(e);
         }
@@ -33,17 +32,25 @@ function Registreren() {
     return (
         <div className="content">
             <h1>Registreren</h1>
-            <form className="registration-form" onSubmit={handleSubmit}>
+            <form className="registration-form" onSubmit={handleSubmit(onFormSubmit)}>
 
                 <label htmlFor="details-username">
                     <p>Gebruikersnaam</p>
                     <input
                         type="text"
                         id="details-username"
-                        onChange={(event) => setUsername(event.target.value)}
-                        value={username}
-                        name="details-username"
+                        {...register("username", {
+                            required: {
+                                value: true,
+                                message: "Dit veld is verplicht!"
+                            },
+                            minLength: {
+                                value: 6,
+                                message: "Dit veld moet minimaal 6 karakters lang zijn!"
+                            }
+                        })}
                     />
+                    {errors.username && <p>{errors.username.message}</p>}
                 </label>
 
                 <label htmlFor="details-email">
@@ -51,10 +58,14 @@ function Registreren() {
                     <input
                         type="email"
                         id="details-email"
-                        onChange={(event) => setEmail(event.target.value)}
-                        value={email}
-                        name="details-email"
+                        {...register("email", {
+                            required: {
+                                value: true,
+                                message: "Dit veld is verplicht!"
+                            },
+                        })}
                     />
+                    {errors.email && <p>{errors.email.message}</p>}
                 </label>
 
                 <label htmlFor="details-password">
@@ -62,10 +73,18 @@ function Registreren() {
                     <input
                         type="password"
                         id="details-password"
-                        onChange={(event) => setPassword(event.target.value)}
-                        value={password}
-                        name="details-password"
+                        {...register("password", {
+                            required: {
+                                value: true,
+                                message: "Dit veld is verplicht!"
+                            },
+                            minLength: {
+                                value: 6,
+                                message: "Dit veld moet minimaal 6 karakters lang zijn!"
+                            }
+                        })}
                     />
+                    {errors.password && <p>{errors.password.message}</p>}
                 </label>
 
                 <p>Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.</p>

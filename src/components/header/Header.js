@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 import Button from "../button/Button";
 import {AuthContext} from "../../context/AuthContext";
 
-function Header() {
+function Header({togglePopup, setPopupText}) {
     const {isAuth, logout} = useContext(AuthContext);
     const [navbar, setNavbar] = useState(false);
 
@@ -17,6 +17,12 @@ function Header() {
     };
 
     window.addEventListener('scroll', changeBackground);
+
+    function logoutActions() {
+        logout();
+        togglePopup(true);
+        setPopupText("Je bent succesvol uitgelogd!");
+    }
 
     return (
         <header className={navbar ? 'navbar active' : 'navbar'}>
@@ -32,7 +38,7 @@ function Header() {
                         <li>
                             <Button
                                 type="button"
-                                clickAction={logout}
+                                clickAction={logoutActions}
                             >
                                 uitloggen
                             </Button>

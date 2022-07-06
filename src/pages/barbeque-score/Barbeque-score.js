@@ -4,7 +4,9 @@ import {AuthContext} from "../../context/AuthContext";
 import SearchBar from "../../components/searchBar/SearchBar";
 import axios from "axios";
 import kelvinToCelsius from "../../helpers/kelvinToCelsius";
-import ResultTile from "../../components/result/Result-tile";
+import ResultTile from "../../components/result-tile/Result-tile";
+import {Link} from "react-router-dom";
+import bbqRating from "../../helpers/bbqRating";
 
 function BarbequeScore() {
     const {user} = useContext(AuthContext);
@@ -15,6 +17,8 @@ function BarbequeScore() {
     const [weatherData, setWeatherData] = useState('');
     const [currentDate, setCurrentDate] = useState('');
     const [currentDay, setCurrentDay] = useState('');
+
+
 
     useEffect(() => {
         async function fetchLocationGeo() {
@@ -35,7 +39,7 @@ function BarbequeScore() {
     }, [location]);
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchCurrentWeather() {
 
             try {
                 const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=nl`);
@@ -47,7 +51,7 @@ function BarbequeScore() {
         }
 
         if (lat && lon) {
-            fetchData();
+            fetchCurrentWeather();
         }
     }, [lat, lon])
 
@@ -97,6 +101,11 @@ function BarbequeScore() {
                     <p>Hallo {user.username},</p>
                     <p>Welkom op de Barbeque-score-pagina. Voer jouw stad/dorp hierboven in om de resultaten te
                         weergeven.</p>
+                    <fieldset className="change-data">
+                        <legend>Gegevens wijzigen</legend>
+                       <Link to="/changepassword">Wachtwoord wijzigen</Link>
+                        <Link to="/changeemail">Email wijzigen</Link>
+                    </fieldset>
 
                 </>}
 
@@ -105,7 +114,9 @@ function BarbequeScore() {
                         <h2>Op dit moment:</h2>
                         <div className="inner-result-container">
                             <ResultTile
-                                score="87"
+                                celsius={kelvinToCelsius(weatherData.main.temp)}
+                                description={weatherData.weather[0].description}
+                                score={bbqRating(weatherData.main.temp, weatherData.wind.speed,0)}
                                 day={currentDay}
                                 dateAndTime={currentDate}
                             />

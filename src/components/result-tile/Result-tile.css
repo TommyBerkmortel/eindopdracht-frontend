@@ -10,18 +10,18 @@
     margin: 10px;
 }
 
-.score {
-    font-size: 100px;
-}
 
 .green {
     color: green;
+    font-size: 100px;
 }
 
 .orange {
     color: orange;
+    font-size: 100px;
 }
 
 .red {
     color: red;
+    font-size: 100px;
 }

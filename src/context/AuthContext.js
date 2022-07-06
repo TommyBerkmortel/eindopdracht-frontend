@@ -54,13 +54,11 @@ function AuthContextProvider({children}) {
     }, []);
 
     function login(jwtToken) {
-        console.log("Je bent ingelogd en de token is in de localstorage geplaatst")
         localStorage.setItem('token', jwtToken);
         getData(jwtToken);
     }
 
     function logout() {
-        console.log("User is uitgelogged en accestoken is verwijderd uit de local storage");
         localStorage.clear();
         toggleAuth({isAuth: false, user: null, status: 'done'});
         history.push('/');

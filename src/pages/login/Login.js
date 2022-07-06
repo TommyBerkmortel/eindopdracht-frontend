@@ -4,7 +4,7 @@ import Button from "../../components/button/Button";
 import {AuthContext} from "../../context/AuthContext";
 import axios from "axios";
 
-function Login() {
+function Login({togglePopup, setPopupText}) {
     const { login } = useContext(AuthContext);
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')

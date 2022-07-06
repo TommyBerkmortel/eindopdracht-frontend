@@ -1,12 +1,15 @@
 import createRating from "./createRating";
 import roundNumber from "./roundNumber";
 
+
 function bbqRating(temperature, windspeed, rain) {
-    const temperatureRating = createRating(temperature, 25, 20);
+    const kelvinToCelsius = temperature - 273
+
+    const temperatureRating = createRating(kelvinToCelsius, 23, 20);
     const windRating = createRating(windspeed, 0, 10);
     const rainRating = createRating(rain, 0, 5);
 
-    return roundNumber((temperatureRating + windRating + rainRating) / 3, 2)
+    return roundNumber((temperatureRating + windRating + rainRating) / 0.3, 0)
 }
 
 export default bbqRating;
