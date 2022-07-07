@@ -18,7 +18,7 @@ import ChangeEmail from "./pages/changeEmail/ChangeEmail";
 
 
 function App() {
-    const { isAuth } = useContext(AuthContext);
+    const {isAuth} = useContext(AuthContext);
     const [popup, togglePopup] = useState(false);
     const [popupText, setPopupText] = useState('');
 
@@ -41,27 +41,31 @@ function App() {
                     </Route>
 
                     <Route path="/barbeque-score">
-                        {isAuth ? <BarbequeScore/> : <Redirect to="/" />}
+                        {isAuth ? <BarbequeScore togglePopup={togglePopup} setPopupText={setPopupText}/> :
+                            <Redirect to="/"/>}
                     </Route>
 
                     <Route path="/recepten">
-                        {isAuth ? <Recepten/> : <Redirect to="/" />}
+                        {isAuth ? <Recepten/> : <Redirect to="/"/>}
                     </Route>
 
                     <Route path="/tips-tricks">
-                        {isAuth ? <TipsTricks/> : <Redirect to="/" />}
+                        {isAuth ? <TipsTricks/> : <Redirect to="/"/>}
                     </Route>
 
                     <Route path="/changepassword">
-                        {isAuth ? <ChangePassword /> : <Redirect to="/" />}
+                        {isAuth ? <ChangePassword/> : <Redirect to="/"/>}
                     </Route>
 
                     <Route path="/changeemail">
-                        {isAuth ? <ChangeEmail /> : <Redirect to="/" />}
+                        {isAuth ? <ChangeEmail/> : <Redirect to="/"/>}
                     </Route>
 
                     <Route path="/contact">
-                        <Contact/>
+                        <Contact
+                            togglePopup={togglePopup}
+                            setPopupText={setPopupText}
+                        />
                     </Route>
 
                     <Route path="/registratie">

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link, useHistory} from "react-router-dom";
 import './Registreren.css'
 import Button from "../../components/button/Button";
@@ -6,9 +6,6 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 
 function Registreren({togglePopup, setPopupText}) {
-    /*const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');*/
     const history = useHistory();
     const {register, handleSubmit, formState: {errors}} = useForm();
 
@@ -50,7 +47,7 @@ function Registreren({togglePopup, setPopupText}) {
                             }
                         })}
                     />
-                    {errors.username && <p>{errors.username.message}</p>}
+                    {errors.username && <p className="form-error">{errors.username.message}</p>}
                 </label>
 
                 <label htmlFor="details-email">
@@ -65,7 +62,7 @@ function Registreren({togglePopup, setPopupText}) {
                             },
                         })}
                     />
-                    {errors.email && <p>{errors.email.message}</p>}
+                    {errors.email && <p className="form-error">{errors.email.message}</p>}
                 </label>
 
                 <label htmlFor="details-password">
@@ -84,7 +81,7 @@ function Registreren({togglePopup, setPopupText}) {
                             }
                         })}
                     />
-                    {errors.password && <p>{errors.password.message}</p>}
+                    {errors.password && <p className="form-error">{errors.password.message}</p>}
                 </label>
 
                 <p>Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.</p>

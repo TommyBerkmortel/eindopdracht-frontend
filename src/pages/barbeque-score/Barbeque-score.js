@@ -8,9 +8,8 @@ import ResultTile from "../../components/result-tile/Result-tile";
 import {Link} from "react-router-dom";
 import bbqRating from "../../helpers/bbqRating";
 
-function BarbequeScore() {
+function BarbequeScore({togglePopup, setPopupText}) {
     const {user} = useContext(AuthContext);
-    const apiKey = 'aedc56390099fc6f9692b80ac58be0bb';
     const [location, setLocation] = useState('');
     const [lat, setLat] = useState('');
     const [lon, setLon] = useState('');
@@ -24,12 +23,13 @@ function BarbequeScore() {
         async function fetchLocationGeo() {
 
             try {
-                const LocationResult = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${location},NL&appid=${apiKey}`);
+                const LocationResult = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${location},NL&appid=${process.env.REACT_APP_API_KEY}`);
                 setLat(LocationResult.data[0].lat);
                 setLon(LocationResult.data[0].lon);
             } catch (e) {
                 console.error(e);
-                console.log("Gefaald op ophalen LON LAN")
+                togglePopup(true);
+                setPopupText("Plaats/dorpnaam niet gevonden!")
             }
         }
 
@@ -42,7 +42,7 @@ function BarbequeScore() {
         async function fetchCurrentWeather() {
 
             try {
-                const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=nl`);
+                const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}&lang=nl`);
                 console.log(result.data);
                 setWeatherData(result.data)
             } catch (e) {
@@ -59,7 +59,7 @@ function BarbequeScore() {
         async function fetchForecastData() {
 
             try {
-                const forecastData = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=nl`);
+                const forecastData = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}&lang=nl`);
                 console.log(forecastData);
             } catch (e) {
                 console.error(e);
@@ -110,6 +110,7 @@ function BarbequeScore() {
                 </>}
 
                 {Object.keys(weatherData).length > 0 &&
+                    <>
                     <div className="result-container">
                         <h2>Op dit moment:</h2>
                         <div className="inner-result-container">
@@ -125,7 +126,56 @@ function BarbequeScore() {
                                                                                          src="https://image.buienradar.nl/2.0/image/single/RadarMapRainNL?height=270&width=275&renderBackground=True&renderBranding=False&renderText=True"/></a>
                             </div>
                         </div>
-                    </div>}
+                    </div>
+
+                        <div className="result-container">
+                            <h2>top 3:</h2>
+                            <div className="inner-result-container">
+                                <ResultTile
+                                    title="#1"
+                                    celsius={kelvinToCelsius(288)}
+                                    description="geen idee"
+                                    score={bbqRating(288, 3,0)}
+                                    day="Een dag?"
+                                    dateAndTime="Een datum?"
+                                />
+
+                                <ResultTile
+                                    title="#2"
+                                    celsius={kelvinToCelsius(288)}
+                                    description="geen idee"
+                                    score={bbqRating(288, 3,0)}
+                                    day="Een dag?"
+                                    dateAndTime="Een datum?"
+                                />
+
+                                <ResultTile
+                                    title="#3"
+                                    celsius={kelvinToCelsius(288)}
+                                    description="geen idee"
+                                    score={bbqRating(288, 3,0)}
+                                    day="Een dag?"
+                                    dateAndTime="Een datum?"
+                                />
+
+                            </div>
+                        </div>
+
+                        <div className="result-container">
+                            <h2>De eerstvolgende BBQ-dag:</h2>
+                            <div className="inner-result-container">
+                                <ResultTile
+                                    title="#1"
+                                    celsius={kelvinToCelsius(288)}
+                                    description="geen idee"
+                                    score={bbqRating(288, 3,0)}
+                                    day="Een dag?"
+                                    dateAndTime="Een datum?"
+                                />
+
+                            </div>
+                        </div>
+                    </>}
 
 
             </section>

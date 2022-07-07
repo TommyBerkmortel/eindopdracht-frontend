@@ -1,38 +1,38 @@
-import React, {useState, useTransition} from 'react';
+import React from 'react';
 import Button from "../../components/button/Button";
 import './Contact.css'
+import { useForm } from "react-hook-form";
 
 
-function Contact() {
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
-    const [websiteLink, setWebsiteLink] = useState('');
+function Contact({togglePopup, setPopupText}) {
+    const {register, handleSubmit, formState: {errors}} = useForm();
 
+    function onFormSubmit(data) {
+        console.log(data);
+        togglePopup(true);
+        setPopupText("Het contact formulier is (zogenaamd) verstuurd!")
 
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log(email, message, websiteLink);
-        setEmail('');
-        setMessage('');
-        setWebsiteLink('');
     }
 
     return (
         <div className="content">
             <h1>Contact</h1>
-            <form className="registration-form" onSubmit={handleSubmit}>
+            <form className="registration-form" onSubmit={handleSubmit(onFormSubmit)}>
 
 
                 <label htmlFor="details-email">
-                    <p>Emailadres (verplicht)</p>
+                    <p>Emailadres</p>
                     <input
                         type="email"
                         id="details-email"
-                        onChange={(event) => setEmail(event.target.value)}
-                        value={email}
-                        name="details-email"
+                        {...register("email", {
+                            required: {
+                                value: true,
+                                message: "Dit veld is verplicht!"
+                            },
+                        })}
                     />
+                    {errors.email && <p className="form-error">{errors.email.message}</p>}
                 </label>
 
                 <label htmlFor="details-message">
@@ -40,22 +40,25 @@ function Contact() {
                     <textarea
                         type="text"
                         id="details-message"
-                        onChange={(event) => setMessage(event.target.value)}
-                        value={message}
-                        name="details-message"
                         rows="10"
                         cols="50"
+                        {...register("message", {
+                            required: {
+                                value: true,
+                                message: "Dit veld is verplicht!"
+                            },
+                        })}
                     />
+                    {errors.message && <p className="form-error">{errors.message.message}</p>}
                 </label>
+
 
                 <label htmlFor="details-websiteLink">
                     <p>Link naar een website (optie)</p>
                     <input
                         type="url"
                         id="details-websiteLink"
-                        onChange={(event) => setWebsiteLink(event.target.value)}
-                        value={websiteLink}
-                        name="details-websiteLink"
+                        {...register("url")}
                     />
                 </label>
 

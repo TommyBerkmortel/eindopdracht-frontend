@@ -5,7 +5,7 @@ import roundNumber from "./roundNumber";
 function bbqRating(temperature, windspeed, rain) {
     const kelvinToCelsius = temperature - 273
 
-    const temperatureRating = createRating(kelvinToCelsius, 23, 20);
+    const temperatureRating = createRating(kelvinToCelsius, 24, 20);
     const windRating = createRating(windspeed, 0, 10);
     const rainRating = createRating(rain, 0, 5);
 
