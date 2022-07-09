@@ -56,7 +56,7 @@ Voer de onderstaande stappen uit om alle benodigde elementen voor dit project te
    #### `npm install npm@latest -g`
 
 
-### start
+### Start
 
 - Als de installatie klaar is kan de applicatie opgestart worden. Dit kan door onderstaande command in
   uw terminal in te voeren:
