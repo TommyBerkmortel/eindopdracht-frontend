@@ -1,6 +1,6 @@
 # Best day 2 BBQ
 
-React applicatie die helpt om te bepalen of het een goede dag is om te barbequën!
+React applicatie die helpt om te bepalen of het een goede dag is om te barbecueën!
 ___
 
 ## Het project
