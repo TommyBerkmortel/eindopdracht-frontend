@@ -23,12 +23,15 @@ function Header({togglePopup, setPopupText}) {
         togglePopup(true);
         setPopupText("Je bent succesvol uitgelogd!");
     }
-
     return (
         <header className={navbar ? 'navbar active' : 'navbar'}>
             <nav>
-                <ul>
-                    <li><NavLink to="/barbeque-score" activeClassName="active-link">Barbeque-score</NavLink></li>
+                <ul className="ul-container">
+
+                    <li><NavLink to="/barbeque-score" activeClassName="active-link">
+                        <span className="full-text">Barbeque-score</span>
+                        <span className="short-text">BBQ-score</span>
+                    </NavLink></li>
                     <li><NavLink to="/recepten" activeClassName="active-link">Recepten</NavLink></li>
                     <li><NavLink to="/tips-tricks" activeClassName="active-link">Tips & tricks</NavLink></li>
                     <li><NavLink to="/contact" activeClassName="active-link">Contact</NavLink></li>

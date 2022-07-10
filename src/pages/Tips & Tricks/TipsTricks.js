@@ -9,7 +9,7 @@ function TipsTricks() {
                 van toepassing.</p>
 
             <article>
-                <h2>Hygiëne</h2>
+                <h3>Hygiëne</h3>
                 <p>Zorg voor schone, gewassen handen. Gebruik schone materialen en gebruik voor rauwe (vlees)producten
                     weer
                     andere tangen, grijpers en bestek dan voor gegaarde producten. Leg bereid vlees ook niet terug op
@@ -58,7 +58,6 @@ function TipsTricks() {
                     gebruik dan de zijkanten van de BBQ waar het mogelijk minder heet is dan in het midden. Snij
                     eventuele
                     zwarte randjes of korstjes weg</p>
-
             </article>
 
             <article>
@@ -83,6 +82,7 @@ function TipsTricks() {
                 </ul>
                 <p>Goed doorgaren (minimum 70 ˚C kerm temperatuur)</p>
             </article>
+
             <article>
                 <ul className="tips-list">
                     <li>Barbecueworstjes (voorgegaard): 6 à 8 minuten</li>

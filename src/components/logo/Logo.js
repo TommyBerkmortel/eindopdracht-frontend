@@ -5,8 +5,7 @@ import './Logo.css'
 
 function Logo() {
     return (
-
-            <span className="logo-container"><Link to="/"><img src={logo} alt="logo"/></Link></span>
+        <span className="logo-container"><Link to="/"><img src={logo} alt="logo"/></Link></span>
     );
 }
 

@@ -16,7 +16,6 @@ import PopUp from "./components/popup/PopUp";
 import ChangePassword from "./pages/changePassword/ChangePassword";
 import ChangeEmail from "./pages/changeEmail/ChangeEmail";
 
-
 function App() {
     const {isAuth} = useContext(AuthContext);
     const [popup, togglePopup] = useState(false);
@@ -34,7 +33,6 @@ function App() {
             </PopUp>
 
             <Wrapper>
-
                 <Switch>
                     <Route exact path="/">
                         <Home/>
@@ -54,11 +52,19 @@ function App() {
                     </Route>
 
                     <Route path="/changepassword">
-                        {isAuth ? <ChangePassword/> : <Redirect to="/"/>}
+                        {isAuth ?
+                            <ChangePassword
+                                togglePopup={togglePopup}
+                                setPopupText={setPopupText}
+                            /> : <Redirect to="/"/>}
                     </Route>
 
                     <Route path="/changeemail">
-                        {isAuth ? <ChangeEmail/> : <Redirect to="/"/>}
+                        {isAuth ?
+                            <ChangeEmail
+                                togglePopup={togglePopup}
+                                setPopupText={setPopupText}
+                            /> : <Redirect to="/"/>}
                     </Route>
 
                     <Route path="/contact">
@@ -81,8 +87,6 @@ function App() {
                             setPopupText={setPopupText}
                         />
                     </Route>
-
-
                 </Switch>
             </Wrapper>
             <Logo/>

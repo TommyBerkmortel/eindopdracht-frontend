@@ -1,8 +1,7 @@
 import React from 'react';
 import Button from "../../components/button/Button";
 import './Contact.css'
-import { useForm } from "react-hook-form";
-
+import {useForm} from "react-hook-form";
 
 function Contact({togglePopup, setPopupText}) {
     const {register, handleSubmit, formState: {errors}} = useForm();
@@ -11,15 +10,11 @@ function Contact({togglePopup, setPopupText}) {
         console.log(data);
         togglePopup(true);
         setPopupText("Het contact formulier is (zogenaamd) verstuurd!")
-
     }
-
     return (
         <div className="content">
             <h1>Contact</h1>
             <form className="registration-form" onSubmit={handleSubmit(onFormSubmit)}>
-
-
                 <label htmlFor="details-email">
                     <p>Emailadres</p>
                     <input
@@ -52,7 +47,6 @@ function Contact({togglePopup, setPopupText}) {
                     {errors.message && <p className="form-error">{errors.message.message}</p>}
                 </label>
 
-
                 <label htmlFor="details-websiteLink">
                     <p>Link naar een website (optie)</p>
                     <input
@@ -62,8 +56,6 @@ function Contact({togglePopup, setPopupText}) {
                     />
                 </label>
 
-
-
                 <div className="button-container">
                     <Button
                         type="submit"
@@ -72,8 +64,6 @@ function Contact({togglePopup, setPopupText}) {
                     </Button>
                 </div>
             </form>
-
-
         </div>
     );
 }

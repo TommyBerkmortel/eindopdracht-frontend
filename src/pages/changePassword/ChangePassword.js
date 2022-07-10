@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import Button from "../../components/button/Button";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
-function ChangePassword() {
 
+function ChangePassword({togglePopup, setPopupText}) {
     const [password, setPassword] = useState('');
     const [repeatedPassword, setRepeatedPassword] = useState('');
     const jwt = localStorage.getItem("token");
@@ -11,17 +11,23 @@ function ChangePassword() {
 
     async function changePassword(e) {
         e.preventDefault();
-        try{
-            const result = await axios.put('https://frontend-educational-backend.herokuapp.com/api/user', {
+        try {
+            await axios.put('https://frontend-educational-backend.herokuapp.com/api/user', {
                 password: password,
                 repeatedPassword: repeatedPassword
-            }, { headers:{
-                "Content-Type": "application/json",
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
                     Authorization: `Bearer ${jwt}`,
-            }})
-            history.push("/barbeque-score")
-        }catch (e){
-            console.error(e)
+                }
+            })
+            history.push("/barbeque-score");
+            togglePopup(true);
+            setPopupText("Uw wachtwoord is gewijzigd!");
+        } catch (e) {
+            console.error(e);
+            togglePopup(true);
+            setPopupText("Er is iets mis gegaan! U dient 2x hetzelfde wachtwoord in te vullen");
         }
     }
 
@@ -29,7 +35,6 @@ function ChangePassword() {
         <div className="content">
             <h1>Wijzig wachtwoord</h1>
             <form className="registration-form" onSubmit={changePassword}>
-
                 <label htmlFor="details-password">
                     <p>Wachtwoord</p>
                     <input
@@ -66,8 +71,6 @@ function ChangePassword() {
                     </Button>
                 </div>
             </form>
-
-
         </div>
     );
 }

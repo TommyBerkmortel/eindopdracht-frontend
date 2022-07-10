@@ -5,7 +5,7 @@ import closingIcon from '../../assets/icon/close.png'
 function PopUp(props) {
 
     function onClickHandler() {
-        props.setTrigger(false)
+        props.setTrigger(false);
         console.clear();
     }
 

@@ -3,7 +3,6 @@ import './Home.css'
 import Button from "../../components/button/Button";
 import {useHistory} from "react-router-dom";
 
-
 function Home() {
     const history = useHistory()
 
@@ -17,15 +16,13 @@ function Home() {
                     eerstvolgende dag is wanneer je jouw heerlijke barbeque gerechten kan laten proeven aan
                     vrienden/familie?</p>
                 <p>Registreer en log in voor de barbeque-score, recepten en de tips & tricks pagina's!</p>
-                    <Button
-                        type="button"
-                        clickAction={() => history.push('/registratie')}
-                    >
-                        registreren
-                    </Button>
-
+                <Button
+                    type="button"
+                    clickAction={() => history.push('/registratie')}
+                >
+                    registreren
+                </Button>
             </section>
-
         </>
     );
 }

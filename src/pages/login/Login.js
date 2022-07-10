@@ -5,20 +5,30 @@ import {AuthContext} from "../../context/AuthContext";
 import axios from "axios";
 
 function Login({togglePopup, setPopupText}) {
-    const { login } = useContext(AuthContext);
+    const {login} = useContext(AuthContext);
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        console.log(username, password);
-        login()
+        try {
+            const result = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin', {
+                username: username,
+                password: password
+            })
+            login(result.data.accessToken);
+            togglePopup(true);
+            setPopupText("Je bent succesvol ingelogd!");
+        } catch (e) {
+            console.error(e);
+            togglePopup(true);
+            setPopupText("De combinatie gebruikersnaam/wachtwoord is niet juist!");
+        }
     }
     return (
         <div className="content">
             <h1>inloggen</h1>
             <form className="registration-form" onSubmit={handleSubmit}>
-
                 <label htmlFor="details-username">
                     <p>Gebruikersnaam</p>
                     <input
@@ -50,8 +60,6 @@ function Login({togglePopup, setPopupText}) {
                     </Button>
                 </div>
             </form>
-
-
         </div>
     );
 }

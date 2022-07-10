@@ -10,8 +10,9 @@
 :root {
     --borderColor: #827570;
 }
+
 /*--------------------------------------2. Typography ------------------------------------------------------*/
-*{
+* {
     font-family: 'Kalam', cursive;
     color: #f2f2f2;
     text-transform: uppercase;
@@ -20,7 +21,8 @@
 input, textarea {
     text-transform: none;
     font-size: 24px;
-    width: 50%;
+    width: 70%;
+    min-width: 240px;
 }
 
 input {
@@ -31,7 +33,7 @@ input {
     height: 50px;
 }
 
-a, button {
+a, button, .short-text, .full-text {
     font-family: 'Kameron', serif;
     font-size: 24px;
 }
@@ -61,7 +63,6 @@ p {
     border-radius: 10px;
     border: 3px solid var(--borderColor);
     background-color: rgba(34, 34, 34, 0.80);
-
 }
 
 body {
@@ -76,10 +77,87 @@ body {
 }
 
 
+/*--------------------------------------4. media query -----------------------------------------------------------*/
+.short-text { display: none; }
+
+@media screen and (max-width: 1260px) {
+    nav button, nav a, nav li, .short-text, .full-text {
+        font-size: 16px;
+        max-width: 150px;
+    }
+
+    nav ul {
+        width: 1000px;
+    }
+
+    .short-text { display: inline-block; }
+    .full-text { display: none; }
+
+    p, section li {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1035px) {
+
+    nav ul {
+        width: 800px;
+    }
+
+    .change-data a {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 825px) {
+    nav button, nav a, nav li, .short-text, .full-text  {
+        font-size: 12px;
+        max-width: 120px;
+    }
+
+    nav ul {
+        width: 600px;
+    }
+
+    h1, section h1  {
+        font-size: 30px;
+    }
+
+    p, section li {
+        font-size: 12px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    .change-data a {
+        font-size: 14px;
+    }
+}
 
 
-/*--------------------------------------4. Areas -----------------------------------------------------------*/
+@media screen and (max-width: 625px) {
+    nav button, nav a, nav li {
+        font-size: 9px;
+        max-width: 93px;
 
-/*------- 4.1 area 1 ---------------------------------------------------------------------------------------*/
 
+    }
 
+    nav ul {
+        width: 450px;
+    }
+
+    .inner-container {
+        margin: 0 10px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    .logo-container {
+        width: 0;
+    }
+}

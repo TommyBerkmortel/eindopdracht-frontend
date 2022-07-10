@@ -1,4 +1,4 @@
-function createRating (value, ideal, range) {
+function createRating(value, ideal, range) {
     const difference = Math.abs(value - ideal);
 
     if (difference > range)

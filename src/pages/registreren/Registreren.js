@@ -3,7 +3,7 @@ import {Link, useHistory} from "react-router-dom";
 import './Registreren.css'
 import Button from "../../components/button/Button";
 import axios from "axios";
-import { useForm } from "react-hook-form";
+import {useForm} from "react-hook-form";
 
 function Registreren({togglePopup, setPopupText}) {
     const history = useHistory();
@@ -14,8 +14,8 @@ function Registreren({togglePopup, setPopupText}) {
             await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup',
                 {
                     "username": data.username,
-                    "email" : data.email,
-                    "password" : data.password,
+                    "email": data.email,
+                    "password": data.password,
                     "role": ["user"]
                 })
             history.push("/login");
@@ -23,14 +23,18 @@ function Registreren({togglePopup, setPopupText}) {
             setPopupText("Je bent succesvol geregistreerd!");
         } catch (e) {
             console.error(e);
+            togglePopup(true);
+            if (e.response.data.message === 'This email is already in use') {
+                setPopupText("Dit e-mailadres is al in gebruik.");
+            } else if (e.response.data.message === 'This username is already in use') {
+                setPopupText("Deze gebruikersnaam is al in gebruik.");
+            }
         }
     }
-
     return (
         <div className="content">
             <h1>Registreren</h1>
             <form className="registration-form" onSubmit={handleSubmit(onFormSubmit)}>
-
                 <label htmlFor="details-username">
                     <p>Gebruikersnaam</p>
                     <input
@@ -89,12 +93,10 @@ function Registreren({togglePopup, setPopupText}) {
                     <Button
                         type="submit"
                     >
-                        Verzenden
+                        registreren
                     </Button>
                 </div>
             </form>
-
-
         </div>
     );
 }

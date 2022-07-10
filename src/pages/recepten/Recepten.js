@@ -13,7 +13,6 @@ function Recepten() {
         <section className="content">
             <h1>Recepten</h1>
             <div className="article-container">
-
                 <ArticleRecipe
                     title="Tatakisalade van diamanthaas"
                     picture={imageOne}

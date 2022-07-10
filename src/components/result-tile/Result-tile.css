@@ -10,7 +10,6 @@
     margin: 10px;
 }
 
-
 .green {
     color: green;
     font-size: 100px;
@@ -24,4 +23,8 @@
 .red {
     color: red;
     font-size: 100px;
+}
+
+.under-construction {
+    width: 50%;
 }

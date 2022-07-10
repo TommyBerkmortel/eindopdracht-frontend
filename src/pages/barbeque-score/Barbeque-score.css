@@ -2,6 +2,7 @@
     border: 3px solid var(--borderColor);
     border-radius: 10px;
     width: 100%;
+    min-width: 315px;
 }
 
 .inner-result-container {

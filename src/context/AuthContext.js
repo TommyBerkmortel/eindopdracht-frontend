@@ -3,9 +3,7 @@ import {useHistory} from "react-router-dom";
 import validityToken from "../helpers/validityToken";
 import axios from "axios";
 
-
 export const AuthContext = createContext({});
-
 
 function AuthContextProvider({children}) {
     const history = useHistory()
@@ -19,14 +17,14 @@ function AuthContextProvider({children}) {
         const jwt = localStorage.getItem("token")
         if (jwt && validityToken(jwt)) {
             async function getUserData(jwt) {
-
                 try {
                     const userData = await axios.get(`https://frontend-educational-backend.herokuapp.com/api/user`,
-                        {headers:{
+                        {
+                            headers: {
                                 "Content-Type": "application/json",
                                 Authorization: `Bearer ${jwt}`,
-                            }})
-
+                            }
+                        })
                     toggleAuth({
                         isAuth: true,
                         user: {
@@ -36,14 +34,12 @@ function AuthContextProvider({children}) {
                         },
                         status: 'done'
                     });
-                    console.log("Token wordt gechecked op geldigheid & user data wordt opnieuw opgehaald")
                 } catch (e) {
                     console.error(e)
-                    console.log("Er is iets misgegaan met het ophalen van de data");
+                    localStorage.clear();
                 }
             }
             getUserData(jwt);
-
         } else {
             toggleAuth({
                 isAuth: false,
@@ -64,14 +60,15 @@ function AuthContextProvider({children}) {
         history.push('/');
     }
 
-    async function getData(token){
-        try{
+    async function getData(token) {
+        try {
             const userData = await axios.get(`https://frontend-educational-backend.herokuapp.com/api/user`,
-                {headers:{
+                {
+                    headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
-                    }})
-
+                    }
+                })
             toggleAuth({
                 isAuth: true,
                 user: {
@@ -81,13 +78,12 @@ function AuthContextProvider({children}) {
                 },
                 status: 'done'
             });
-            history.push("/barbeque-score")
-
-        }catch(e){
-            console.error()
+            history.push("/barbeque-score");
+        } catch (e) {
+            console.error();
+            localStorage.clear();
         }
     }
-
 
     const contextData = {
         isAuth: auth.isAuth,
